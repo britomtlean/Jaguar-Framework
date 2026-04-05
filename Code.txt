@@ -1,0 +1,35 @@
+HTTP trabalha com dados binários, não com string diretamente.
+
+dotnet add package DotNetEnv
+
+HttpListener
+.GetContextAsync() -- Cria uma instancia HttpListenerContext para receber uma requisição HTTP
+
+Encoding -- Classe do .NET (System.Text) responsável por lidar com codificação de caracteres.
+Encoding.UTF8 -- Padrão de decodificação para dados Web
+Encoding.UTF8.GetBytes() -- Converte string em byte
+Encoding.UTF8.GetString() -- Converte byte em string
+
+StreamReader -- Classe para leitura de Stream (Dados recebidos em byte)
+await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); -- Faz a leitura da Stream e converte em string
+
+
+HttpListenerContext
+
+HttpListenerContext context
+ ├── Request   → dados que chegaram
+ └── Response  → o que você vai enviar
+
+var request = context.Request;
+
+request.HttpMethod        // GET, POST
+request.Url               // URL completa
+request.Url.AbsolutePath  // /users
+request.QueryString       // ?id=1
+request.InputStream       // body (JSON, etc) -- Recebe os dados do body como stream no formato de bytes
+
+var response = context.Response;
+
+response.StatusCode = 200;
+response.OutputStream.Write(...);
+response.Close();

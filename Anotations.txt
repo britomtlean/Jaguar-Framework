@@ -1,0 +1,3 @@
+
+async -- Permite uma função receba await
+Task -- Indica que a função é assíncrona
