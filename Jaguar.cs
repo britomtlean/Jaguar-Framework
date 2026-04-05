@@ -13,11 +13,11 @@ namespace ConsoleApp
         {
             this._listener = listiner;
         }
-        
+
 
         public async Task StartApp(string port)
         {
-            this.home = $"http://localhost:{port}/";
+            this.home = $"http://0.0.0.0:{port}/";
 
             _listener.Prefixes.Add(this.home); //Define a porta do servidor
             _listener.Start(); //Inicia o servidor

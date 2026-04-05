@@ -19,12 +19,4 @@
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Sprache.dll
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/obj/Debug/net9.0/ConsoleApp.csproj.AssemblyReference.cache
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/obj/Debug/net9.0/ConsoleApp.csproj.Up2Date
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.EntityFrameworkCore.Abstractions.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.Caching.Abstractions.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.Caching.Memory.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.Logging.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.Logging.Abstractions.dll
-/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Microsoft.Extensions.Options.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/obj/Debug/net9.0/ConsoleApp.sourcelink.json
