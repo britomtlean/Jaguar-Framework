@@ -7,4 +7,6 @@ var app = new Jaguar(listener);
 DotNetEnv.Env.Load(); //.env
 var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
 
+app.Get("/jaguar", () => Console.WriteLine("Hello Jaguar"));
+
 await app.StartApp(port);
