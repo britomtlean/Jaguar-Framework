@@ -54,7 +54,7 @@ namespace ConsoleApp
             //HOME
             if (endpoint == "/" && method == "GET")
             {
-                await RequestResponse.ResponseHTML("index.html", response);
+                await RequestResponse.ResponseHTML(response);
                 response.Close();
                 return;
             }

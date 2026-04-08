@@ -1,6 +1,7 @@
 HTTP trabalha com dados binários, não com string diretamente.
 
 dotnet add package DotNetEnv
+dotnet add package RazorLight
 
 HttpListener
 .GetContextAsync() -- Cria uma instancia HttpListenerContext para receber uma requisição HTTP
@@ -33,3 +34,12 @@ var response = context.Response;
 response.StatusCode = 200;
 response.OutputStream.Write(...);
 response.Close();
+
+
+var engine = new RazorLightEngineBuilder() //Cria engine
+                .UseFileSystemProject(Directory.GetCurrentDirectory())
+                .UseMemoryCachingProvider()
+                .Build();
+
+
+engine.CompileRenderAsync
