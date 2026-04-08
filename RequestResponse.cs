@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text;
+using System.Text.Json;
 
 
 namespace ConsoleApp
@@ -20,10 +21,13 @@ namespace ConsoleApp
 
         }
 
-        public static void SendMessage(string message, HttpListenerResponse response)
+        public static void SendMessage(Object message, HttpListenerResponse response)
         {
 
-            var buffer = Encoding.UTF8.GetBytes(message); //Gera uma resposta
+            string stringJSON = JsonSerializer.Serialize(message).ToString(); //Transforma em JSON e converte em STRING
+            Console.WriteLine($"Dados enviados: {stringJSON}");
+
+            var buffer = Encoding.UTF8.GetBytes(stringJSON); //Converte STRING em BYTE
             response.StatusCode = 200;
             response.OutputStream.Write(buffer, 0, buffer.Length); //Envia Resposta
             response.Close(); //Fecha requisição

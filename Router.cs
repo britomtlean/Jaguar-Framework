@@ -7,11 +7,11 @@ namespace ConsoleApp
 {
     public class Router
     {
-        public string Method { get; set;}
+        public string Method { get; set; }
         public string Endpoint { get; set; }
-        public Action Function { get; set; }
+        public Func<Object> Function { get; set; }
 
-        public Router(string method, string endpoint, Action function)
+        public Router(string method, string endpoint, Func<Object> function)
         {
             this.Method = method;
             this.Endpoint = endpoint;

@@ -1,5 +1,7 @@
 using System.Net;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
 namespace ConsoleApp
@@ -61,7 +63,8 @@ namespace ConsoleApp
             {
                 if (endpoint == router.Endpoint && method == router.Method)
                 {
-                    router.Function();
+                    var message = router.Function();
+                    RequestResponse.SendMessage(message, response);
                     return;
                 }
             }
@@ -101,19 +104,19 @@ namespace ConsoleApp
         }
 
         //Routers Functions
-        public void Get(string endpoint, Action function)
+        public void Get(string endpoint, Func<Object> function)
         {
-            routers.Add( new Router("GET", endpoint, function));
+            routers.Add(new Router("GET", endpoint, function));
         }
-        public void Post(string endpoint, Action function)
+        public void Post(string endpoint, Func<Object> function)
         {
             routers.Add(new Router("POST", endpoint, function));
         }
-        public void Put(string endpoint, Action function)
+        public void Put(string endpoint, Func<Object> function)
         {
             routers.Add(new Router("PUT", endpoint, function));
         }
-        public void Delete(string endpoint, Action function)
+        public void Delete(string endpoint, Func<Object> function)
         {
             routers.Add(new Router("DELETE", endpoint, function));
         }
