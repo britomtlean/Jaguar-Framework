@@ -20,6 +20,7 @@
           "net9.0"
         ],
         "sources": {
+          "/home/mtlean/nuget-packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +52,10 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.7.1, )"
             },
             "RazorLight": {
               "target": "Package",

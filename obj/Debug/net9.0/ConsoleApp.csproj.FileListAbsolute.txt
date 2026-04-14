@@ -354,3 +354,9 @@
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/refs/System.Xml.XPath.dll
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/refs/System.Xml.XPath.XDocument.dll
 /home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/refs/WindowsBase.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/DnsClient.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/MongoDB.Bson.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/MongoDB.Driver.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/SharpCompress.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/Snappier.dll
+/home/mtlean/Documentos/Projects/2026/DOTNET/Console/ConsoleApp/bin/Debug/net9.0/ZstdSharp.dll

@@ -3,6 +3,10 @@ HTTP trabalha com dados binários, não com string diretamente.
 dotnet add package DotNetEnv
 dotnet add package RazorLight
 
+dotnet build -c Release
+dotnet pack -c Release --no-build
+dotnet nuget add source ~/nuget-packages -n LocalPackages -- Cria repositório para pacotes NuGet com Bibliotecas
+
 HttpListener
 .GetContextAsync() -- Cria uma instancia HttpListenerContext para receber uma requisição HTTP
 
@@ -13,6 +17,9 @@ Encoding.UTF8.GetString() -- Converte byte em string
 
 StreamReader -- Classe para leitura de Stream (Dados recebidos em byte)
 await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); -- Faz a leitura da Stream e converte em string
+
+JsonSerializer
+JsonSerializer.Serialize() -- Convete em objeto JSON
 
 
 HttpListenerContext
@@ -43,3 +50,6 @@ var engine = new RazorLightEngineBuilder() //Cria engine
 
 
 engine.CompileRenderAsync
+
+Task.FromResult(retorno) -- Converte etorno em Promise
+

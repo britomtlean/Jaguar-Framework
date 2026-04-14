@@ -4,11 +4,12 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace ConsoleApp
+namespace JaguarFramework
 {
     public class Jaguar
     {
         private readonly HttpListener _listener;
+
         private List<Router> routers = new List<Router>();
 
 
@@ -63,7 +64,7 @@ namespace ConsoleApp
             {
                 if (endpoint == router.Endpoint && method == router.Method)
                 {
-                    var message = router.Function();
+                    var message = await router.Function();
                     RequestResponse.SendMessage(message, response);
                     return;
                 }
@@ -104,21 +105,31 @@ namespace ConsoleApp
         }
 
         //Routers Functions
+
         public void Get(string endpoint, Func<Object> function)
+        {
+            routers.Add(new Router("GET", endpoint, () => Task.FromResult(function())));
+        }
+
+        public void Get(string endpoint, Func<Task<Object>> function)
         {
             routers.Add(new Router("GET", endpoint, function));
         }
+
+        /////////////////////////////////////////////////////////////////
+
+
         public void Post(string endpoint, Func<Object> function)
         {
-            routers.Add(new Router("POST", endpoint, function));
+           // routers.Add(new Router("POST", endpoint, function));
         }
         public void Put(string endpoint, Func<Object> function)
         {
-            routers.Add(new Router("PUT", endpoint, function));
+           // routers.Add(new Router("PUT", endpoint, function));
         }
         public void Delete(string endpoint, Func<Object> function)
         {
-            routers.Add(new Router("DELETE", endpoint, function));
+          //  routers.Add(new Router("DELETE", endpoint, function));
         }
 
     }

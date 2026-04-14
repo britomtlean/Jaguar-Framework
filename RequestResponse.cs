@@ -3,8 +3,7 @@ using System.Text;
 using System.Text.Json;
 using RazorLight;
 
-
-namespace ConsoleApp
+namespace JaguarFramework
 {
     public class RequestResponse
     {

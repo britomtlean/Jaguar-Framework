@@ -1,3 +1,4 @@
 
-async -- Permite uma função receba await
-Task -- Indica que a função é assíncrona
+async -- Permite uma função usar await
+await -- Resolve uma Promise
+Task -- Retorna Promise

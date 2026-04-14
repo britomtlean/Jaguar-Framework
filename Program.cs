@@ -1,11 +1,16 @@
 ﻿using System.Net;
-using ConsoleApp;
+using JaguarFramework;
+using JaguarFramework.Context;
 
 var listener = new HttpListener();
 var app = new Jaguar(listener);
 
-DotNetEnv.Env.Load(); //.env
+var db = new MongoContextDb();
+
+//.ENV
+DotNetEnv.Env.Load();
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
 
 app.Get("/jaguar/swagger", () =>
 {
@@ -32,5 +37,12 @@ app.Get("/jaguar/swagger", () =>
 
     return lista;
 });
+
+app.Get("/users", async () =>
+{
+    var usuarios = await db.GetUsers();
+    return usuarios;
+});
+
 
 await app.StartApp(port);
