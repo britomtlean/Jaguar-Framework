@@ -11,7 +11,7 @@ namespace JaguarFramework.Context
 {
     public class MongoContextDb
     {
-        private readonly IMongoDatabase _database;
+        protected readonly IMongoDatabase _database;
 
         public MongoContextDb()
         {
@@ -36,28 +36,5 @@ namespace JaguarFramework.Context
             var client = new MongoClient(database);
             _database = client.GetDatabase(cluster);
         }
-
-
-
-///////////////////////// FUNÇÃO MODELO \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-        public IMongoCollection<Usuario> usuarios =>
-            _database.GetCollection<Usuario>("Usuarios");
-
-
-        public async Task<List<Usuario>> GetUsers()
-        {
-            var usuarios = await this.usuarios.Find(_ => true).ToListAsync();
-
-            foreach (var u in usuarios)
-            {
-                Console.WriteLine($"Nome: {u.Nome}");
-            }
-
-            return usuarios;
-        }
-
-
     }
 }

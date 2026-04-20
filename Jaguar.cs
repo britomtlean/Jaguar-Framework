@@ -3,6 +3,7 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
+using JaguarFramework.Models;
 
 namespace JaguarFramework
 {
@@ -50,7 +51,8 @@ namespace JaguarFramework
 
             //Verifica o conteudo do Body
             var body = await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); //Transforma o body recebido em bytes em texto
-            Console.WriteLine($"Dados recebidos: {body}");
+            //Console.WriteLine(body); //Body recebido
+            //Console.WriteLine(body?.GetType()); //string
 
             //HOME
             if (endpoint == "/" && method == "GET")
@@ -60,15 +62,24 @@ namespace JaguarFramework
                 return;
             }
 
+                        //HOME
+            if (endpoint == "/login" && method == "GET")
+            {
+                await RequestResponse.LoginPage(response);
+                response.Close();
+                return;
+            }
+
             foreach (var router in this.routers)
             {
                 if (endpoint == router.Endpoint && method == router.Method)
                 {
-                    var message = await router.Function();
+                    var message = await router.Function(body); //recebe como string
                     RequestResponse.SendMessage(message, response);
                     return;
                 }
             }
+
 
             /*
             //Criar Classe para executar Rotas
@@ -104,25 +115,65 @@ namespace JaguarFramework
             response.Close(); //Fecha requisição
         }
 
-        //Routers Functions
+
+
+
+        /////////////////////////// GET \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
         public void Get(string endpoint, Func<Object> function)
         {
-            routers.Add(new Router("GET", endpoint, () => Task.FromResult(function())));
+            //Console.WriteLine("void function");
+
+            Func<string, Task<Object>> GetFunction = async (body) =>
+            {
+                return function();
+            };
+
+            routers.Add(new Router("GET", endpoint, GetFunction));
         }
+
+
 
         public void Get(string endpoint, Func<Task<Object>> function)
         {
-            routers.Add(new Router("GET", endpoint, function));
+            //Console.WriteLine("async function");
+
+            Func<string, Task<Object>> GetFunction = async (body) =>
+            {
+                return await function();
+            };
+
+            routers.Add(new Router("GET", endpoint, GetFunction));
         }
 
-        /////////////////////////////////////////////////////////////////
 
 
-        public void Post(string endpoint, Func<Object> function)
+        /////////////////////////// /POST \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        public void Post<T>(string endpoint, Func<T, Task<Object>> function)
         {
-           // routers.Add(new Router("POST", endpoint, function));
+            Func<string, Task<Object>> PostFunction = async (body) =>
+            {
+                var genericBody = JsonSerializer.Deserialize<T>(body); //Converte string ao Tipo Generico
+                //Console.WriteLine(genericBody.GetType());
+                //Console.WriteLine(user);
+                return await function(genericBody);
+            };
+
+            var route = new Router(
+                "POST",
+                endpoint,
+                PostFunction
+            );
+
+            routers.Add(route);
         }
+
+
+        //////////////////////////////////////////////////////////////
+    
+
         public void Put(string endpoint, Func<Object> function)
         {
            // routers.Add(new Router("PUT", endpoint, function));

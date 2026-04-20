@@ -20,6 +20,7 @@ await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); -- 
 
 JsonSerializer
 JsonSerializer.Serialize() -- Convete em objeto JSON
+JsonSerializer.Deserialize<Usuario>(body);
 
 
 HttpListenerContext
@@ -51,5 +52,5 @@ var engine = new RazorLightEngineBuilder() //Cria engine
 
 engine.CompileRenderAsync
 
-Task.FromResult(retorno) -- Converte etorno em Promise
+Task.FromResult(retorno) -- Converte retorno em Promise
 

@@ -33,6 +33,35 @@ namespace JaguarFramework
 
         }
 
+
+        //////////////////////////
+
+        public static async Task LoginPage(HttpListenerResponse response)
+        {
+            var engine = new RazorLightEngineBuilder() //Cria engine
+                .UseFileSystemProject(Directory.GetCurrentDirectory())
+                .UseMemoryCachingProvider()
+                .Build();
+
+            string message = "Hello Jaguar";
+
+            string html = await engine.CompileRenderAsync( //Compila para html
+                "login.cshtml",
+                message
+            );
+
+            //Console.WriteLine(html);
+
+            var buffer = Encoding.UTF8.GetBytes(html); //Converte HTML em byte
+
+            response.StatusCode = 200;
+            response.ContentType = "text/html";
+            response.ContentLength64 = buffer.Length;
+            await response.OutputStream.WriteAsync(buffer, 0, buffer.Length); //Envia resposta HTTP em BYTE
+            response.Close(); //Fecha requisição
+
+        }
+
         public static void SendMessage(Object message, HttpListenerResponse response)
         {
 
