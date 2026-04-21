@@ -17,7 +17,7 @@ namespace JaguarFramework
             string message = "Hello Jaguar";
 
             string html = await engine.CompileRenderAsync( //Compila para html
-                "template.cshtml",
+                "index.cshtml",
                 message
             );
 
@@ -46,7 +46,7 @@ namespace JaguarFramework
             string message = "Hello Jaguar";
 
             string html = await engine.CompileRenderAsync( //Compila para html
-                "login.cshtml",
+                "pages/login.cshtml",
                 message
             );
 
@@ -61,6 +61,36 @@ namespace JaguarFramework
             response.Close(); //Fecha requisição
 
         }
+
+        /////
+
+        public static async Task RegisterPage(HttpListenerResponse response)
+        {
+            var engine = new RazorLightEngineBuilder() //Cria engine
+                .UseFileSystemProject(Directory.GetCurrentDirectory())
+                .UseMemoryCachingProvider()
+                .Build();
+
+            string message = "Hello Jaguar";
+
+            string html = await engine.CompileRenderAsync( //Compila para html
+                "pages/register.cshtml",
+                message
+            );
+
+            //Console.WriteLine(html);
+
+            var buffer = Encoding.UTF8.GetBytes(html); //Converte HTML em byte
+
+            response.StatusCode = 200;
+            response.ContentType = "text/html";
+            response.ContentLength64 = buffer.Length;
+            await response.OutputStream.WriteAsync(buffer, 0, buffer.Length); //Envia resposta HTTP em BYTE
+            response.Close(); //Fecha requisição
+
+        }
+
+        ////
 
         public static void SendMessage(Object message, HttpListenerResponse response)
         {

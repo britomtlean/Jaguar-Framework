@@ -20,7 +20,7 @@ await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); -- 
 
 JsonSerializer
 JsonSerializer.Serialize() -- Convete em objeto JSON
-JsonSerializer.Deserialize<Usuario>(body);
+JsonSerializer.Deserialize<Usuario>(body); -- Converte objeto recebido de string para Generic selecionado
 
 
 HttpListenerContext

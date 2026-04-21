@@ -41,6 +41,9 @@ namespace JaguarFramework
             var request = context.Request!; //Guarda os dados de entrada
             var response = context.Response!; //Guarda dados de saída
 
+            Console.WriteLine($"Nova requisição:");
+            Console.WriteLine($"Horário: {DateTime.Now}");
+
             //Exibe o Endpoint
             var endpoint = request.Url!.AbsolutePath;
             Console.WriteLine($"Endpoint solicitado: {endpoint}");
@@ -51,8 +54,11 @@ namespace JaguarFramework
 
             //Verifica o conteudo do Body
             var body = await new StreamReader(request.InputStream, Encoding.UTF8).ReadToEndAsync(); //Transforma o body recebido em bytes em texto
-            //Console.WriteLine(body); //Body recebido
+            Console.WriteLine("Body Recebido:");
+            Console.WriteLine(body); //Body recebido
             //Console.WriteLine(body?.GetType()); //string
+
+            Console.WriteLine("-------------------");
 
             //HOME
             if (endpoint == "/" && method == "GET")
@@ -62,7 +68,7 @@ namespace JaguarFramework
                 return;
             }
 
-                        //HOME
+            //LOGIN
             if (endpoint == "/login" && method == "GET")
             {
                 await RequestResponse.LoginPage(response);
@@ -70,6 +76,15 @@ namespace JaguarFramework
                 return;
             }
 
+            //REGISTER
+             if (endpoint == "/register" && method == "GET")
+            {
+                await RequestResponse.RegisterPage(response);
+                response.Close();
+                return;
+            }
+
+            //ENDPOINTS
             foreach (var router in this.routers)
             {
                 if (endpoint == router.Endpoint && method == router.Method)
@@ -80,43 +95,43 @@ namespace JaguarFramework
                 }
             }
 
-
+            //ENDPOINTS MANUAIS
+            
             /*
-            //Criar Classe para executar Rotas
-            if (endpoint == "/" && method == "GET")
-            {
-                await RequestResponse.ResponseHTML("index.html", response);
-                response.Close();
-                return;
+                //Criar Classe para executar Rotas
+                if (endpoint == "/" && method == "GET")
+                {
+                    await RequestResponse.ResponseHTML("index.html", response);
+                    response.Close();
+                    return;
 
-            }
-            else if (endpoint == "/login" && method == "GET")
-            {
-                RequestResponse.SendMessage("Tela de Login", response);
-                response.Close();
-                return;
-            }
-            else if (endpoint == "/cadastro")
-            {
-                RequestResponse.SendMessage("Tela de Cadastro", response);
-                response.Close();
-                return;
-            }
-            else if (endpoint == "/dashboard" && method == "GET")
-            {
-                RequestResponse.SendMessage("Tela de Dashboard", response);
-                response.Close();
-                return;
-            }
+                }
+                else if (endpoint == "/login" && method == "GET")
+                {
+                    RequestResponse.SendMessage("Tela de Login", response);
+                    response.Close();
+                    return;
+                }
+                else if (endpoint == "/cadastro")
+                {
+                    RequestResponse.SendMessage("Tela de Cadastro", response);
+                    response.Close();
+                    return;
+                }
+                else if (endpoint == "/dashboard" && method == "GET")
+                {
+                    RequestResponse.SendMessage("Tela de Dashboard", response);
+                    response.Close();
+                    return;
+                }
             */
-
 
             RequestResponse.SendErrorMessage(response);
             response.Close(); //Fecha requisição
         }
 
 
-
+        //ENDPOINTS MÉTODOS
 
         /////////////////////////// GET \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -172,7 +187,7 @@ namespace JaguarFramework
 
 
         //////////////////////////////////////////////////////////////
-    
+
 
         public void Put(string endpoint, Func<Object> function)
         {
